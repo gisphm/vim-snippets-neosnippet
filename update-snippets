@@ -37,6 +37,7 @@ cd $snippets_dir
 
 echo "renaming snippets to snip"
 find . -maxdepth 2 -type f -name "*.snippets" | while read FNAME; do mv "$FNAME" "${FNAME//.snippets/.snip}"; done
+find . -maxdepth 2 -type f -name 'snippets.snip'| while read FNAME; do mv "$FNAME" "neosnippet.snip"; done
 echo "expanding tab in snip to spaces"
 find . -maxdepth 2 -type f -name '*.snip' -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' '{}' \;
 
