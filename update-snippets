@@ -41,6 +41,8 @@ find . -maxdepth 2 -type f -name 'snippets.snip'| while read FNAME; do mv "$FNAM
 echo "expanding tab in snip to spaces"
 find . -maxdepth 2 -type f -name '*.snip' -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' '{}' \;
 
+wget -q https://github.com/justinj/vim-react-snippets/raw/master/snippets/javascript.snippets -O javascript/react.snip
+
 cd ..
 rm -rf $build_dir
 echo "$build_dir directory removed"
