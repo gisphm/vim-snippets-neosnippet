@@ -48,3 +48,5 @@ cd ..
 rm -rf $build_dir
 echo "$build_dir directory removed"
 echo "*** Updating completed ***"
+
+exit
