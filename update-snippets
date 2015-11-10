@@ -19,16 +19,17 @@ build_dir=build
 snippets_dir=neosnippets
 
 echo "*** Updating started ***"
-echo "removing old neosnippets directory"
 
-[[ -d $snippets_dir ]] && rm -rf $snippets_dir
-
-echo "$build_dir directory created"
+[[ -d $build_dir ]] && rm -rf $build_dir
 mkdir -p $build_dir
-mkdir -p $snippets_dir
+echo "$build_dir directory created"
 
 echo "cloning snippets from github"
 git clone --depth=1 https://github.com/honza/vim-snippets $build_dir
+
+echo "removing old neosnippets directory"
+[[ -d $snippets_dir ]] && rm -rf $snippets_dir
+mkdir -p $snippets_dir
 
 echo "copying snippets to neosnippets directory"
 cp -r $build_dir/snippets/* $snippets_dir
