@@ -25,14 +25,16 @@ mkdir -p $build_dir
 echo "$build_dir directory created"
 
 echo "cloning snippets from github"
-git clone --depth=1 https://github.com/honza/vim-snippets $build_dir
+git clone --quiet --depth=1 https://github.com/honza/vim-snippets $build_dir/vim-snippets
+git clone --quiet --depth=1 https://github.com/chrisgillis/vim-bootstrap3-snippets.git $build_dir/vim-bootstrap3-snippets
 
 echo "removing old neosnippets directory"
 [[ -d $snippets_dir ]] && rm -rf $snippets_dir
 mkdir -p $snippets_dir
 
 echo "copying snippets to neosnippets directory"
-cp -r $build_dir/snippets/* $snippets_dir
+cp -r $build_dir/vim-snippets/snippets/* $snippets_dir
+cp -r $build_dir/vim-bootstrap3-snippets/neosnippets/* $snippets_dir
 
 cd $snippets_dir
 
@@ -44,6 +46,14 @@ wget -q https://github.com/justinj/vim-react-snippets/raw/master/snippets/javasc
 
 echo "expanding tab in snip to spaces"
 find . -maxdepth 2 -type f -name '*.snip' -exec bash -c 'expand -t 4 "$0" > /tmp/e && mv /tmp/e "$0"' '{}' \;
+
+sub_directories=$(find * -maxdepth 0 -type d)
+
+for dir in $sub_directories; do
+    if [[ -f "$dir.snip" ]]; then
+        mv "$dir.snip" $dir
+    fi
+done
 
 cd ..
 rm -rf $build_dir
