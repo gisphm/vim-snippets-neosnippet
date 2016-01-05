@@ -1,4 +1,4 @@
-# Vim-Snippets
+# Extra-Neosnippet-Snippets
 
 * just a copy from [vim-snippets][1] repo
 
