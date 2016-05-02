@@ -22,6 +22,7 @@ echo "*** Updating started ***"
 
 [[ -d $build_dir ]] && rm -rf $build_dir
 mkdir -p $build_dir
+mkdir -p autoload
 echo "$build_dir directory created"
 
 echo "cloning snippets from github"
@@ -33,6 +34,7 @@ echo "removing old neosnippets directory"
 mkdir -p $snippets_dir
 
 echo "copying snippets to neosnippets directory"
+cp -r $build_dir/vim-snippets/autoload/* autoload/
 cp -r $build_dir/vim-snippets/snippets/* $snippets_dir
 cp -r $build_dir/vim-bootstrap3-snippets/neosnippets/* $snippets_dir
 
